@@ -10,21 +10,26 @@
 // No boiler plate code this time,
 // you can do this!
 
-// I AM NOT DONE
 
 trait AppendBar {
-    fn append_bar(self) -> Self;
+    fn append_bar(&mut self) ->&mut Self;
 }
 
 //TODO: Add your code here
-
+impl AppendBar for Vec<String> {
+  fn append_bar(&mut self)->&mut Self{
+    self.push(String::from("Bar"));
+    return self;
+  }
+}
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
     fn is_vec_pop_eq_bar() {
-        let mut foo = vec![String::from("Foo")].append_bar();
+        let mut f = vec![String::from("Foo")];
+        let mut foo = f.append_bar();
         assert_eq!(foo.pop().unwrap(), String::from("Bar"));
         assert_eq!(foo.pop().unwrap(), String::from("Foo"));
     }
